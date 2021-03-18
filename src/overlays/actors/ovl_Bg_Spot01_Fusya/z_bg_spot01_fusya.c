@@ -19,7 +19,7 @@ void func_808AAA50(BgSpot01Fusya* this, GlobalContext* globalCtx);
 
 const ActorInit Bg_Spot01_Fusya_InitVars = {
     ACTOR_BG_SPOT01_FUSYA,
-    ACTORTYPE_BG,
+    ACTORCAT_BG,
     FLAGS,
     OBJECT_SPOT01_OBJECTS,
     sizeof(BgSpot01Fusya),
@@ -68,7 +68,7 @@ void func_808AAA50(BgSpot01Fusya* this, GlobalContext* globalCtx) {
     thisx->shape.rot.z += this->unk_154;
     temp = ((this->unk_154 - 100.0f) / 1700.0f) + 1.0f;
     func_800F436C(&thisx->projectedPos, 0x2085, temp);
-    Math_SmoothScaleMaxF(&this->unk_154, this->unk_158, this->unk_15C, 100.0f);
+    Math_ApproachF(&this->unk_154, this->unk_158, this->unk_15C, 100.0f);
 }
 
 void BgSpot01Fusya_Update(Actor* thisx, GlobalContext* globalCtx) {
@@ -78,15 +78,13 @@ void BgSpot01Fusya_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgSpot01Fusya_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[4];
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_spot01_fusya.c", 210);
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_bg_spot01_fusya.c", 210);
     func_80093D18(globalCtx->state.gfxCtx);
 
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_spot01_fusya.c", 214),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_spot01_fusya.c", 214),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gfxCtx->polyOpa.p++, D_06000100);
+    gSPDisplayList(POLY_OPA_DISP++, D_06000100);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_bg_spot01_fusya.c", 219);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_spot01_fusya.c", 219);
 }

@@ -41,7 +41,7 @@ glabel func_8096784C
 /* 00F40 80967890 14200028 */  bne     $at, $zero, .L80967934     
 /* 00F44 80967894 30790001 */  andi    $t9, $v1, 0x0001           ## $t9 = 00000000
 /* 00F48 80967898 3C018097 */  lui     $at, %hi(D_80969610)       ## $at = 80970000
-/* 00F4C 8096789C 0C00CFC8 */  jal     Math_Rand_CenteredFloat
+/* 00F4C 8096789C 0C00CFC8 */  jal     Rand_CenteredFloat
               
 /* 00F50 809678A0 C42C9610 */  lwc1    $f12, %lo(D_80969610)($at) 
 /* 00F54 809678A4 C604005C */  lwc1    $f4, 0x005C($s0)           ## 0000005C
@@ -53,7 +53,7 @@ glabel func_8096784C
 /* 00F6C 809678BC 3C018097 */  lui     $at, %hi(D_80969618)       ## $at = 80970000
 /* 00F70 809678C0 460A4400 */  add.s   $f16, $f8, $f10            
 /* 00F74 809678C4 E6100060 */  swc1    $f16, 0x0060($s0)          ## 00000060
-/* 00F78 809678C8 0C00CFC8 */  jal     Math_Rand_CenteredFloat
+/* 00F78 809678C8 0C00CFC8 */  jal     Rand_CenteredFloat
               
 /* 00F7C 809678CC C42C9618 */  lwc1    $f12, %lo(D_80969618)($at) 
 /* 00F80 809678D0 C6120064 */  lwc1    $f18, 0x0064($s0)          ## 00000064
@@ -131,7 +131,7 @@ glabel func_8096784C
 /* 0108C 809679DC 00073C03 */  sra     $a3, $a3, 16               
 /* 01090 809679E0 00063403 */  sra     $a2, $a2, 16               
 /* 01094 809679E4 44082000 */  mfc1    $t0, $f4                   
-/* 01098 809679E8 0C01E763 */  jal     Lights_InitType0PositionalLight
+/* 01098 809679E8 0C01E763 */  jal     Lights_PointNoGlowSetInfo
               
 /* 0109C 809679EC AFA8001C */  sw      $t0, 0x001C($sp)           
 /* 010A0 809679F0 8FBF002C */  lw      $ra, 0x002C($sp)           

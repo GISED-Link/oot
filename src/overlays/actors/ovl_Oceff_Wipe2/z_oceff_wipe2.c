@@ -5,7 +5,7 @@
  */
 
 #include "z_oceff_wipe2.h"
-#include <vt.h>
+#include "vt.h"
 
 #define FLAGS 0x02000010
 
@@ -18,7 +18,7 @@ void OceffWipe2_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 const ActorInit Oceff_Wipe2_InitVars = {
     ACTOR_OCEFF_WIPE2,
-    ACTORTYPE_ITEMACTION,
+    ACTORCAT_ITEMACTION,
     FLAGS,
     OBJECT_GAMEPLAY_KEEP,
     sizeof(OceffWipe2),
@@ -34,7 +34,7 @@ void OceffWipe2_Init(Actor* thisx, GlobalContext* globalCtx) {
     OceffWipe2* this = THIS;
     Actor_SetScale(&this->actor, 0.1f);
     this->counter = 0;
-    this->actor.posRot.pos = ACTIVE_CAM->eye;
+    this->actor.world.pos = ACTIVE_CAM->eye;
     osSyncPrintf(VT_FGCOL(CYAN) " WIPE2 arg_data = %d\n" VT_RST, this->actor.params);
 }
 
@@ -43,14 +43,14 @@ void OceffWipe2_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     Player* player = PLAYER;
 
     func_800876C8(globalCtx);
-    if (gSaveContext.nayrusLoveTimer) {
-        player->unk_692 |= 0x40;
+    if (gSaveContext.nayrusLoveTimer != 0) {
+        player->stateFlags3 |= 0x40;
     }
 }
 
 void OceffWipe2_Update(Actor* thisx, GlobalContext* globalCtx) {
     OceffWipe2* this = THIS;
-    this->actor.posRot.pos = ACTIVE_CAM->eye;
+    this->actor.world.pos = ACTIVE_CAM->eye;
     if (this->counter < 100) {
         this->counter++;
     } else {
@@ -59,28 +59,24 @@ void OceffWipe2_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void OceffWipe2_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    u32 scroll;
-    OceffWipe2* this;
+    u32 scroll = globalCtx->state.frames & 0xFF;
+    OceffWipe2* this = THIS;
     f32 z;
-    GraphicsContext* gfxCtx;
     u8 alpha;
-    u32 pad1;
+    s32 pad[2];
     Vec3f eye;
     Vtx* vtxPtr;
     Vec3f vec;
-    Gfx* dispRefs[5];
-    this = THIS;
-    scroll = globalCtx->state.frames & 0xFF;
 
     eye = ACTIVE_CAM->eye;
-    func_8005AFB4(&vec, ACTIVE_CAM);
+    Camera_GetSkyboxOffset(&vec, ACTIVE_CAM);
     if (this->counter < 32) {
-        z = Math_Sins(this->counter << 9) * 1330;
+        z = Math_SinS(this->counter << 9) * 1330;
     } else {
         z = 1330;
     }
 
-    vtxPtr = vertices;
+    vtxPtr = sFrustumVtx;
     if (this->counter >= 80) {
         alpha = 12 * (100 - this->counter);
     } else {
@@ -91,8 +87,7 @@ void OceffWipe2_Draw(Actor* thisx, GlobalContext* globalCtx) {
         vtxPtr[11].v.cn[3] = vtxPtr[13].v.cn[3] = vtxPtr[15].v.cn[3] = vtxPtr[16].v.cn[3] = vtxPtr[18].v.cn[3] =
             vtxPtr[20].v.cn[3] = alpha;
 
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_oceff_wipe2.c", 390);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_oceff_wipe2.c", 390);
 
     func_80093D84(globalCtx->state.gfxCtx);
 
@@ -101,15 +96,15 @@ void OceffWipe2_Draw(Actor* thisx, GlobalContext* globalCtx) {
     func_800D1FD4(&globalCtx->mf_11DA0);
     Matrix_Translate(0.0f, 0.0f, -z, MTXMODE_APPLY);
 
-    gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_oceff_wipe2.c", 400),
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_oceff_wipe2.c", 400),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    gDPSetPrimColor(gfxCtx->polyXlu.p++, 0, 0, 255, 255, 170, 255);
-    gDPSetEnvColor(gfxCtx->polyXlu.p++, 255, 100, 0, 128);
-    gSPDisplayList(gfxCtx->polyXlu.p++, sTextureDL);
-    gSPDisplayList(gfxCtx->polyXlu.p++, Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, scroll * 6, scroll * (-6), 64, 64,
-                                                         1, scroll * (-6), 0, 64, 64));
-    gSPDisplayList(gfxCtx->polyXlu.p++, sFrustrumDl);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 170, 255);
+    gDPSetEnvColor(POLY_XLU_DISP++, 255, 100, 0, 128);
+    gSPDisplayList(POLY_XLU_DISP++, sTextureDL);
+    gSPDisplayList(POLY_XLU_DISP++, Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, scroll * 6, scroll * (-6), 64, 64, 1,
+                                                     scroll * (-6), 0, 64, 64));
+    gSPDisplayList(POLY_XLU_DISP++, sFrustumDL);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_oceff_wipe2.c", 417);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_oceff_wipe2.c", 417);
 }

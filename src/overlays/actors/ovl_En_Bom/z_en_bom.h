@@ -1,8 +1,8 @@
 #ifndef _Z_EN_BOM_H_
 #define _Z_EN_BOM_H_
 
-#include <ultra64.h>
-#include <global.h>
+#include "ultra64.h"
+#include "global.h"
 
 struct EnBom;
 
@@ -12,7 +12,7 @@ typedef struct EnBom {
     /* 0x0000 */ Actor actor;
     /* 0x014C */ ColliderCylinder bombCollider;
     /* 0x0198 */ ColliderJntSph explosionCollider;
-    /* 0x01B8 */ ColliderJntSphItem explosionColliderItems[1];
+    /* 0x01B8 */ ColliderJntSphElement explosionColliderItems[1];
     /* 0x01F8 */ s16 timer;
     /* 0x01FA */ s16 flashSpeedScale;
     /* 0x01FC */ f32 flashIntensity;
@@ -22,7 +22,7 @@ typedef struct EnBom {
 
 typedef enum {
     /* 0x00 */ BOMB_BODY,
-    /* 0x01 */ BOMB_EXPLOSION,
+    /* 0x01 */ BOMB_EXPLOSION
 } EnBomType;
 
 extern const ActorInit En_Bom_InitVars;

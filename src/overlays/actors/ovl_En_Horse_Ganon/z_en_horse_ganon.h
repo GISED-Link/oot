@@ -1,15 +1,8 @@
 #ifndef _Z_EN_HORSE_GANON_H_
 #define _Z_EN_HORSE_GANON_H_
 
-#include <ultra64.h>
-#include <global.h>
-
-struct unk_D_80A69248;
-
-typedef struct unk_D_80A69248 {
-    /* 0x0 */ Vec3s unk_0;
-    /* 0x6 */ u8 unk_6;
-} unk_D_80A69248; // size = 0x8
+#include "ultra64.h"
+#include "global.h"
 
 struct EnHorseGanon;
 
@@ -26,9 +19,9 @@ typedef struct EnHorseGanon {
     /* 0x01F0 */ u8 unk_1F0[0x04];
     /* 0x01F4 */ f32 unk_1F4;
     /* 0x01F8 */ u8 unk_1F8[0x04];
-    /* 0x01FC */ ColliderCylinder colliderCylinder;
-    /* 0x0248 */ ColliderJntSph colliderSphere;
-    /* 0x0268 */ ColliderJntSphItem colliderSphereItem;
+    /* 0x01FC */ ColliderCylinder colliderBody;
+    /* 0x0248 */ ColliderJntSph colliderHead;
+    /* 0x0268 */ ColliderJntSphElement headElements[1];
 } EnHorseGanon; // size = 0x02A8
 
 extern const ActorInit En_Horse_Ganon_InitVars;

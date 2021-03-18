@@ -124,7 +124,7 @@ glabel func_8091A9E8
 /* 05188 8091AB98 E7AA0018 */  swc1    $f10, 0x0018($sp)          
 /* 0518C 8091AB9C AFAD001C */  sw      $t5, 0x001C($sp)           
 /* 05190 8091ABA0 AFAE0020 */  sw      $t6, 0x0020($sp)           
-/* 05194 8091ABA4 0C00C916 */  jal     Actor_SpawnAttached
+/* 05194 8091ABA4 0C00C916 */  jal     Actor_SpawnAsChild
               
 /* 05198 8091ABA8 AFAF0024 */  sw      $t7, 0x0024($sp)           
 /* 0519C 8091ABAC 10400006 */  beq     $v0, $zero, .L8091ABC8     
@@ -137,7 +137,7 @@ glabel func_8091A9E8
 .L8091ABC8:
 /* 051B8 8091ABC8 8FA300B8 */  lw      $v1, 0x00B8($sp)           
 /* 051BC 8091ABCC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 051C0 8091ABD0 0C018A29 */  jal     func_800628A4              
+/* 051C0 8091ABD0 0C018A29 */  jal     Collider_UpdateSpheres              
 /* 051C4 8091ABD4 246507BC */  addiu   $a1, $v1, 0x07BC           ## $a1 = 000007BC
 /* 051C8 8091ABD8 8FBF003C */  lw      $ra, 0x003C($sp)           
 /* 051CC 8091ABDC 8FB00038 */  lw      $s0, 0x0038($sp)           

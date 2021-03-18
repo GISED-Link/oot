@@ -3,11 +3,11 @@ glabel func_809EEA90
 /* 01224 809EEA94 AFBF001C */  sw      $ra, 0x001C($sp)           
 /* 01228 809EEA98 AFA40020 */  sw      $a0, 0x0020($sp)           
 /* 0122C 809EEA9C AFA50024 */  sw      $a1, 0x0024($sp)           
-/* 01230 809EEAA0 0C02927F */  jal     SkelAnime_FrameUpdateMatrix
+/* 01230 809EEAA0 0C02927F */  jal     SkelAnime_Update
               
 /* 01234 809EEAA4 2484014C */  addiu   $a0, $a0, 0x014C           ## $a0 = 0000014C
 /* 01238 809EEAA8 8FA40020 */  lw      $a0, 0x0020($sp)           
-/* 0123C 809EEAAC 0C00BD04 */  jal     func_8002F410              
+/* 0123C 809EEAAC 0C00BD04 */  jal     Actor_HasParent              
 /* 01240 809EEAB0 8FA50024 */  lw      $a1, 0x0024($sp)           
 /* 01244 809EEAB4 10400005 */  beq     $v0, $zero, .L809EEACC     
 /* 01248 809EEAB8 8FA40020 */  lw      $a0, 0x0020($sp)           

@@ -128,13 +128,13 @@ glabel func_80A5BD94
 /* 00C6C 80A5BF5C AE480108 */  sw      $t0, 0x0108($s2)           ## 00000108
 /* 00C70 80A5BF60 86090008 */  lh      $t1, 0x0008($s0)           ## 80A65F48
 /* 00C74 80A5BF64 A6490032 */  sh      $t1, 0x0032($s2)           ## 00000032
-/* 00C78 80A5BF68 0C00B69E */  jal     func_8002DA78
+/* 00C78 80A5BF68 0C00B69E */  jal     Actor_WorldYawTowardActor
 /* 00C7C 80A5BF6C 8EC51C44 */  lw      $a1, 0x1C44($s6)           ## 00001C44
 /* 00C80 80A5BF70 A64200B6 */  sh      $v0, 0x00B6($s2)           ## 000000B6
 /* 00C84 80A5BF74 02602025 */  or      $a0, $s3, $zero            ## $a0 = 00000000
 /* 00C88 80A5BF78 02202825 */  or      $a1, $s1, $zero            ## $a1 = 00000024
 /* 00C8C 80A5BF7C 02803025 */  or      $a2, $s4, $zero            ## $a2 = 000000E4
-/* 00C90 80A5BF80 0C029B84 */  jal     func_800A6E10
+/* 00C90 80A5BF80 0C029B84 */  jal     SkinMatrix_Vec3fMtxFMultXYZW
 /* 00C94 80A5BF84 02A03825 */  or      $a3, $s5, $zero            ## $a3 = 000000F0
 .L80A5BF88:
 /* 00C98 80A5BF88 3C0A80A6 */  lui     $t2, %hi(D_80A665DA)       ## $t2 = 80A60000

@@ -11,7 +11,7 @@ glabel func_80B8EFF4
 /* 00598 80B8F018 01F81021 */  addu    $v0, $t7, $t8
 /* 0059C 80B8F01C 8C450000 */  lw      $a1, 0x0000($v0)           ## 00000000
 /* 005A0 80B8F020 8C460004 */  lw      $a2, 0x0004($v0)           ## 00000004
-/* 005A4 80B8F024 0C01DE80 */  jal     Math_ApproxF
+/* 005A4 80B8F024 0C01DE80 */  jal     Math_StepToF
 
 /* 005A8 80B8F028 24840068 */  addiu   $a0, $a0, 0x0068           ## $a0 = 00000068
 /* 005AC 80B8F02C 8FB9007C */  lw      $t9, 0x007C($sp)
@@ -44,7 +44,7 @@ glabel func_80B8EFF4
 /* 00618 80B8F098 AFA50054 */  sw      $a1, 0x0054($sp)
 /* 0061C 80B8F09C AFA60074 */  sw      $a2, 0x0074($sp)
 /* 00620 80B8F0A0 0C01DF97 */  jal     Math_Vec3s_ToVec3f
-              ## Vec3f_CopyVec3s
+              ## Vec3f_CopyFrameTable
 /* 00624 80B8F0A4 27A4005C */  addiu   $a0, $sp, 0x005C           ## $a0 = FFFFFFE4
 /* 00628 80B8F0A8 260501D8 */  addiu   $a1, $s0, 0x01D8           ## $a1 = 000001D8
 /* 0062C 80B8F0AC AFA50028 */  sw      $a1, 0x0028($sp)
@@ -137,7 +137,7 @@ glabel func_80B8EFF4
 /* 0076C 80B8F1EC 8FA60054 */  lw      $a2, 0x0054($sp)
 /* 00770 80B8F1F0 27A40040 */  addiu   $a0, $sp, 0x0040           ## $a0 = FFFFFFC8
 /* 00774 80B8F1F4 27A50034 */  addiu   $a1, $sp, 0x0034           ## $a1 = FFFFFFBC
-/* 00778 80B8F1F8 0C032C04 */  jal     func_800CB010
+/* 00778 80B8F1F8 0C032C04 */  jal     Math3D_CosOut
 /* 0077C 80B8F1FC 27A60030 */  addiu   $a2, $sp, 0x0030           ## $a2 = FFFFFFB8
 /* 00780 80B8F200 10400004 */  beq     $v0, $zero, .L80B8F214
 /* 00784 80B8F204 C7A60030 */  lwc1    $f6, 0x0030($sp)
